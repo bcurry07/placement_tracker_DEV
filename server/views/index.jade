@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .container(style="margin: 0px; width: 100%")
+        .nav-container
+            div(ng-controller='mainMenuCtrl')
+                .navbar.navbar-fixed-top.sample.shadow-z-2(style="background-color: #4285f4")
+                    .navbar-header.col-md-offset-2
+                        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-responsive-collapse')
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        img(style="height: 60px; width: 100px; padding: 0px").navbar-brand(src='/vendor/logo.jpg')
+                    .navbar-collapse.collapse.navbar-responsive-collapse
+                        ul.nav.navbar-nav
+                            li#home.nav(ng-class="{active: isActive('/')}")
+                                a(href='/') Placements
+                            li#new.nav(ng-class="{active: isActive('/graphs')}")
+                                a(href='/graphs') Graph
+
+        ng-view

@@ -1,0 +1,4 @@
+.idea
+data
+mongod.lock
+node_modules

@@ -1,0 +1,61 @@
+.row
+    .col-md-1.col-md-offset-2
+        button.btn.btn-fab.btn-raised.btn-material-red(ng-click="addNew()", data-toggle="tooltip", data-placement="top", title="Add New Placement!")
+            i.mdi-social-person-add
+
+    .col-md-2
+        input.form-control(type="text", placeholder="Search", ng-model="filterText", style="height: 56px")
+
+
+
+hr
+.row
+    .col-md-6.col-md-offset-2.well.well-lg
+        table.table.table-striped.table-hover
+            thead
+                tr.strong.placementRow
+                    td.deleteCell
+                    td.placementNameColumn.cursor(ng-click="placementSortOrder='name'; reverseSort = !reverseSort") Name
+                    td.cursor(ng-click="placementSortOrder='date'; reverseSort = !reverseSort") Date
+                    td.cursor(ng-click="sortColumn='client'; reverseSort = !reverseSort; sortTable()") Client
+                    td.cursor(ng-click="sortColumn='type'; reverseSort = !reverseSort; sortTable()") Type
+                    td.cursor(ng-click="sortColumn='onBilling'; reverseSort = !reverseSort; sortTable()") On Billing
+                        span.badge.btn-warning(style="margin-left: 5px") {{onBillingCount}}
+                    td Notes
+            tbody
+                tr(ng-repeat="placement in placements | orderBy:placementSortOrder:reverseSort | filter:filterText")
+                    td(style="padding: 0px")
+                        .btn-group.menuBtn
+                            button.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="false", style="border: 0px; background-color: white; padding: 0px")
+                                span
+                                    i.mdi-navigation-more-vert.deleteIcon.cursor(data-placement="top", title="Edit...")
+                            ul.dropdown-menu(role="menu")
+                                li(ng-click="editPlacement(placement)")
+                                    a(href="#")
+                                        i.mdi-content-create(style="font-size: 18px; margin-right: 5px")
+                                        | Edit Placement
+                                li(ng-click="setPlacementToDelete(placement)", data-toggle="modal", data-target="#deleteModal")
+                                    a(href="#")
+                                        i.mdi-action-delete(style="font-size: 18px; margin-right: 5px")
+                                        | Delete Placement
+                            //i.mdi-navigation-more-vert.deleteIcon.cursor.(data-toggle="modal", data-target="#deleteModal", data-placement="top", title="Edit..." ng-click="setPlacementToDelete(placement)")
+                    td
+                        span {{placement.name}}
+                    td {{placement.date | dateFilter}}
+                    td {{placement.client}}
+                    td {{placement.type}}
+                    td
+                        .togglebutton.togglebutton-material-green
+                            label
+                                input(type="checkbox", ng-checked="placement.onBilling",ng-click="updateBilling(placement)", style="margin-left: 25px")
+                                span.toggle
+                        //span.billingIcon.cursor.glyphicon.glyphicon-ok(data-toggle="tooltip", data-placement="top", title="Change Billing Status", ng-show="placement.onBilling | onBillingIcon", ng-click="updateBilling(placement)")
+                        //span.billingIcon.cursor.glyphicon.glyphicon-remove(data-toggle="tooltip", data-placement="top", title="Change Billing Status", ng-hide="placement.onBilling | onBillingIcon", ng-click="updateBilling(placement)")
+                    td {{placement.notes}}
+    .col-md-2.col-md-offset-1.well
+        billing-by-client-panel
+
+delete-modal
+
+
+

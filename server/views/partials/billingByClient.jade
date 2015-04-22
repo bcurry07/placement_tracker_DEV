@@ -1,0 +1,15 @@
+.panel.panel-default.panel-success
+    .panel-heading.text-center(style="background-color: #eca403; color: white") Placements by Client
+    table.table
+        tr.panelHeaderRow
+            th.cursor.clientNameColumn(ng-click="billingCountSortOrder='client'; countReverseSort = !countReverseSort") Client
+            th
+            th.cursor.text-center(ng-click="billingCountSortOrder='billCount'; countReverseSort = !countReverseSort") On Billing
+            th.cursor(ng-click="billingCountSortOrder='count'; countReverseSort = !countReverseSort") Total Placements
+        tr(ng-repeat="item in list | orderBy:billingCountSortOrder:countReverseSort")
+            td {{item.client}}
+            td
+                btn.btn.btn-danger.filterButton(data-toggle="tooltip", title="Remove Filter", ng-show="isSelected(item)", ng-click="removeFilter()")
+                    span.glyphicon.glyphicon-filter.pull-left
+            td.text-center {{item.billCount}}
+            td.numTotal.text-center {{item.count}}

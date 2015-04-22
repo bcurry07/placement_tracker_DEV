@@ -1,0 +1,41 @@
+#placementFormModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(type='button', data-dismiss='modal')
+                    span(aria-hidden='true') ×
+                    span.sr-only Close
+                h4#myModalLabel.modal-title Placement Form
+            .modal-body
+                ng-form.col-md-6(name="newPlacementForm")
+                    .fieldset
+                        .form-group
+                            input.form-control(name="placementName", id="placementName", type="text", required, ng-model="placement.name", ng-auto-focus, placeholder="Candidate Name")
+                        .form-group
+                            input.form-control(name="placementDate", id="placementDate", type="text", required, ng-model="placement.date", placeholder="Placement Date", date-input)
+                        .form-group.clientInput
+                            input.form-control(name="placementClient", id="placementClient", type="text", required, ng-model="placement.client", placeholder="Client Name", typeahead="client for client in clients | filter:$viewValue")
+                        .form-group
+                            .togglebutton.togglebutton-material-green
+                                label(style="font-weight: bold") Currently on Billing?
+                                    input(type="checkbox", ng-checked="placement.onBilling | onBillingIcon", style="margin-left: 10px", ng-model="placement.onBilling")
+                        .form-group
+                            label Placement Type:
+                            .placementTypeRadio
+                                .radio.radio-info
+                                    label Contract
+                                        input(type="radio" name="placementTypeRadio" value="Contract", checked="", ng-model="placement.type")
+                                .radio.radio-info
+                                    label Perm
+                                        input(type="radio" name="placementTypeRadio" value="Perm", ng-model="placement.type")
+                        .form-group
+                            input.form-control(name="placementNotes", id="placementNotes", type="text", ng-model="placement.notes", placeholder="Enter Comments...")
+            .modal-footer
+                button.btn.btn-success(ng-disabled="newPlacementForm.$invalid", ng-click="addNewPlacement(placement)") Save
+                    //ng-disabled="newPlacementForm.$invalid",
+                button.btn.btn-default.cancel_button(type="button", ng-click="cancelEdit()") Cancel
+
+
+
+
+

@@ -1,0 +1,12 @@
+div(ng-repeat="year in years | orderBy:'-year'")
+    //div.navbar-fixed-top {{year.year}}
+    .row
+        .col-md-2
+            h1.text-center.graph_year {{year.year}}
+        .col-md-1.well
+            h4 Contract: {{year.contractCount}}
+            h4 Perm: {{year.permCount}}
+            h4 TOTAL: {{year.contractCount + year.permCount}}
+        .col-md-6(high-chart, year="{{year.year}}")
+     br
+    hr
