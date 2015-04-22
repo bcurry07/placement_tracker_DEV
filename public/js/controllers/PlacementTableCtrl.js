@@ -1,5 +1,6 @@
 angular.module('app').controller('placementTableCtrl', function($scope, $location, PlacementData, onBillCount, OnBillCountByClient, notifier, editingPlacement, $http) {
   $.material.init();
+  notifier.notify('warning', 'Oh hey there! This is the development environment, so please feel free to poke around a little! Add, edit, or delete whatever you want!', true, 'toast-top-full-width', 10000);
 
   $scope.filterText = "";
     //this function is called when a user clicks the x or check icon to update billing status

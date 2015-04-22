@@ -4,12 +4,16 @@ angular.module('app').value('toastr', toastr);
 
 angular.module('app').factory('notifier', function(toastr) {
    return {
-       notify: function(type, msg) {
+       notify: function(type, msg, close, position, timeout) {
+
+         if(!close) close = true;
+         if(!position) position = "toast-bottom-left";
+         if(!timeout) timeout = 5000;
 
           toastr.options = {
-            closeButton: true,
-            positionClass: "toast-bottom-left",
-            timeOut: 5000
+            closeButton: close,
+            positionClass: position,
+            timeOut: timeout
           };
 
            if(type === "success") {
